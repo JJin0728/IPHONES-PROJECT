@@ -1,0 +1,55 @@
+
+CREATE TABLE CarSurvey_Answer
+(
+  Unique_A_ID INT          NOT NULL COMMENT '답변 unique id',
+  Answer      VARCHAR(200) NOT NULL COMMENT '답변',
+  PRIMARY KEY (Unique_A_ID)
+) COMMENT '자동차설문답변';
+
+CREATE TABLE CarSurvey_Question
+(
+  Unique_Q_ID INT          NOT NULL COMMENT 'unique id',
+  Question    VARCHAR(200) NOT NULL COMMENT '질문',
+  PRIMARY KEY (Unique_Q_ID)
+) COMMENT '자동차설문질문';
+
+CREATE TABLE CarSurvey_User
+(
+  Unique_ID INT          NOT NULL COMMENT 'unique id',
+  Name      VARCHAR(200) NOT NULL COMMENT '이름',
+  PRIMARY KEY (Unique_ID)
+) COMMENT '사용자 정보';
+
+CREATE TABLE 이름_통계
+(
+  Unique_ID INT NOT NULL COMMENT 'unique id',
+  항목_통계         NOT NULL
+);
+
+CREATE TABLE 질문별
+(
+  항목_통계           NOT NULL,
+  Unique_Q_ID INT NOT NULL COMMENT 'unique id',
+  Unique_A_ID INT NOT NULL COMMENT '답변 unique id',
+  PRIMARY KEY (항목_통계)
+);
+
+ALTER TABLE 질문별
+  ADD CONSTRAINT FK_CarSurvey_Question_TO_질문별
+    FOREIGN KEY (Unique_Q_ID)
+    REFERENCES CarSurvey_Question (Unique_Q_ID);
+
+ALTER TABLE 질문별
+  ADD CONSTRAINT FK_CarSurvey_Answer_TO_질문별
+    FOREIGN KEY (Unique_A_ID)
+    REFERENCES CarSurvey_Answer (Unique_A_ID);
+
+ALTER TABLE 이름_통계
+  ADD CONSTRAINT FK_CarSurvey_User_TO_이름_통계
+    FOREIGN KEY (Unique_ID)
+    REFERENCES CarSurvey_User (Unique_ID);
+
+ALTER TABLE 이름_통계
+  ADD CONSTRAINT FK_질문별_TO_이름_통계
+    FOREIGN KEY (항목_통계)
+    REFERENCES 질문별 (항목_통계);
