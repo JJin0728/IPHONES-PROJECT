@@ -8,7 +8,7 @@ import java.util.Scanner;
 class UniqueID {
     public ResultSet max(int unique_ID){
         // MySQL 이름의 unique_ID의 MAX 값을 가져오는 class
-        String QUERY = "select max(Unique_ID) " + "from CarSurvey_Uswer ";
+        String QUERY = "select max(Unique_ID) " + "from CarSurvey_User ";
         ResultSet rs = stmt.executeQuery(QUERY);
         return rs;
     }
