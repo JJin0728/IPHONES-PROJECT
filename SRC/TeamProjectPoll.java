@@ -1,4 +1,4 @@
-package src;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,21 +51,20 @@ public class TeamProjectPoll {
         
         // database 이름 Unique_ID MAX값을 가져와서 query에서 insert할때 +1씩 해주는 코드
         int Unique_ID = 0;
-        String QUERY = "select max(Unique_ID) " + "from CarSurvey_Uswer ";
+        String QUERY = "select max(Unique_ID) " + "from carSurvey_user ";
         ResultSet rs = stmt.executeQuery(QUERY);
-        Unique_ID = stmt.executeUpdate(QUERY);
     
         // insert
-        QUERY = "insert into CarSurvey_Uswer(Unique_ID, Name) " + 
-                "values ( " + (Unique_ID+1) + ", " + name + " ) ";
+        QUERY = "insert into carSurvey_user(Unique_ID, Name) " + 
+                "values ( " + rs + ", " + name + " ) ";
         int val = stmt.executeUpdate(QUERY);
 
-        QUERY = "insert into CarSurvey_Uswer(choice) " + 
+        QUERY = "insert into carSurvey_user(choice) " + 
                 "values ( " + one + ", " + two + ", " + three + ", " + four + " ) ";
         int val1 = stmt.executeUpdate(QUERY);
 
         // select
-        QUERY = "select Unique_ID, Name " + "from CarSurvey_Answer ";
+        QUERY = "select Unique_ID, Name " + "from CarSurvey_answer ";
         ResultSet rs1 = stmt.executeQuery(QUERY); 
         while (rs1.next()) {
             System.out.print("Unique_ID: " + rs1.getInt("Unique_ID"));

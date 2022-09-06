@@ -1,4 +1,4 @@
-package src;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ public class TeamProjectMain {
 
         final String USER = "root";
         final String PASS = "tbrs00002b";
-        final String DB_URL = "jdbc:mysql://localhost/";
+        final String DB_URL = "jdbc:mysql://localhost/iphones_datebase2";
                 
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         Statement stmt = conn.createStatement(); 
@@ -22,7 +22,7 @@ public class TeamProjectMain {
         String answer = scanner.nextLine();
 
         if ("s".equals(answer)){
-            TeamProjectStatistic_me statistic = new TeamProjectStatistic_me();
+            TeamProjectStatistic statistic = new TeamProjectStatistic();
             statistic.StatisticFunction(stmt);
         }
         else if ("p".equals(answer)){
